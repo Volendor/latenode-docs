@@ -1,0 +1,2 @@
+# Latenode Docs
+This repository contains Markdown copies of Latenode documentation scraped from latenode.com for personal use and reference. No license granted – please refer to original documentation at https://help.latenode.com/ for official terms.
