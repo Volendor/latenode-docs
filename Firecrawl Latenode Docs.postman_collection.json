@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "0a4f595d-2fcd-47a0-a29f-253a7f9afb7d",
+		"name": "Firecrawl Latenode Docs",
+		"description": "Ready-to-use API calls to crawl Latenode & Nodul documentation whenever it’s updated.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40494411"
+	},
+	"item": [
+		{
+			"name": "Crawl Latenode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"(() => {\r",
+							"    let payload;\r",
+							"\r",
+							"    try {\r",
+							"        payload = pm.response.json();\r",
+							"    } catch (err) {\r",
+							"        console.error('Failed to parse JSON response:', err);\r",
+							"        return;\r",
+							"    }\r",
+							"\r",
+							"    const { id } = payload;\r",
+							"\r",
+							"    pm.test('Response contains a non-empty \"id\"', () => {\r",
+							"        pm.expect(id, 'Expected \"id\" to be a non-empty string')\r",
+							"          .to.be.a('string')\r",
+							"          .and.not.be.empty;\r",
+							"    });\r",
+							"\r",
+							"    pm.collectionVariables.set('job_id', id);\r",
+							"    console.info(`Saved collection variable \"job_id\": ${id}`);\r",
+							"})();\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Firecrawl_API}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"url\": \"https://help.latenode.com/\",\r\n\t\t\"limit\": 1,\r\n\t\t\"maxDepth\": 4,\r\n\t\t\"includePaths\": [ \"(general-info/.+|quick-start--basics/.+|advanced-features/.+|examples--tutorials/.+|support--analytics/.+|white-label/.+)\" ],\r\n\t\t\"scrapeOptions\": {\r\n\t\t\t\"formats\": [ \"markdown\" ],\r\n\t\t\t\"onlyMainContent\": true,\r\n\t\t\t\"includeTags\": [ \"article\" ],\r\n\t\t\t\"excludeTags\": [ \".helpkit-article-feedback-wrapper\", \".h-30\", \"button\" ]\r\n\t\t}\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.firecrawl.dev/v1/crawl",
+					"protocol": "https",
+					"host": [
+						"api",
+						"firecrawl",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"crawl"
+					]
+				},
+				"description": "## Request Overview\n\nThis is a **POST** request to the endpoint `https://api.firecrawl.dev/v1/crawl`. This API is designed to initiate a web crawling operation based on the specified parameters.\n\n### Request Parameters\n\nThe request body must be in JSON format and includes the following parameters:\n\n- **url** (string): The target URL to crawl. For example, `\"https://help.latenode.com/\"`.\n    \n- **limit** (integer): The maximum number of pages to crawl. For example, `250`.\n    \n- **maxDepth** (integer): The maximum depth of links to follow from the initial URL. For example, `4`.\n    \n- **includePaths** (array of strings): A list of regex patterns that specify which paths to include in the crawl. Example: `[\"(general-info/.+|quick-start--basics/.+|advanced-features/.+|examples--tutorials/.+|support--analytics/.+|white-label/.+)\"]`.\n    \n- **scrapeOptions** (object): An object containing options for scraping.\n    \n    - **formats** (array of strings): The formats to use for the scraped content. Example: `[\"markdown\"]`.\n        \n    - **onlyMainContent** (boolean): A flag indicating whether to scrape only the main content. Example: `true`.\n        \n    - **includeTags** (array of strings): A list of HTML tags to include in the scraped content. Example: `[\"article\"]`.\n        \n    - **excludeTags** (array of strings): A list of HTML tags to exclude from the scraped content. Example: `[\".helpkit-article-feedback-wrap\", \".h-30\", \"button\"]`.\n        \n\n#### Expected Response\n\nThe response from this endpoint will typically include the results of the crawl operation, which may consist of the following:\n\n- **status** (string): Indicates the success or failure of the crawl operation.\n    \n- **data** (object): Contains the scraped content and any relevant metadata.\n    \n- **errors** (array of strings): A list of any errors encountered during the crawl.\n    \n\nMake sure to handle the response appropriately based on the status returned.\n\n### Example cURL Command\n\n``` bash\ncurl -X POST https://api.firecrawl.dev/v1/crawl \\\n    -H 'Content-Type: application/json' \\\n    -H &#x27;Authorization: Bearer <YOUR_ACCESS_TOKEN>&#x27; \\\n    -d '{\n        \"url\": \"https://help.latenode.com/\",\n        \"limit\": 250,\n        \"maxDepth\": 4,\n        \"includePaths\": [ \"(general-info/.+|quick-start--basics/.+|advanced-features/.+|examples--tutorials/.+|support--analytics/.+|white-label/.+)\" ],\n        \"scrapeOptions\": {\n            \"formats\": [ \"markdown\" ],\n            \"onlyMainContent\": true,\n            \"includeTags\": [ \"article\" ],\n            \"excludeTags\": [ \".helpkit-article-feedback-wrap\", \".h-30\", \"button\" ]\n        }\n    }'\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Crawl Nodul",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"(() => {\r",
+							"    let payload;\r",
+							"\r",
+							"    try {\r",
+							"        payload = pm.response.json();\r",
+							"    } catch (err) {\r",
+							"        console.error('Failed to parse JSON response:', err);\r",
+							"        return;\r",
+							"    }\r",
+							"\r",
+							"    const { id } = payload;\r",
+							"\r",
+							"    pm.test('Response contains a non-empty \"id\"', () => {\r",
+							"        pm.expect(id, 'Expected \"id\" to be a non-empty string')\r",
+							"          .to.be.a('string')\r",
+							"          .and.not.be.empty;\r",
+							"    });\r",
+							"\r",
+							"    pm.collectionVariables.set('job_id', id);\r",
+							"    console.info(`Saved collection variable \"job_id\": ${id}`);\r",
+							"})();\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Firecrawl_API}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"url\": \"https://docs.nodul.ru/docs/7cf1dd92-8fb6-4b47-817c-5671778d2814/\",\r\n\t\t\"limit\": 250,\r\n\t\t\"maxDepth\": 5,\r\n\t\t\"includePaths\": [ \"docs/.+\" ],\r\n\t\t\"ignoreSitemap\": true,\r\n\t\t\"allowBackwardLinks\": true,\r\n\t\t\"scrapeOptions\": {\r\n\t\t\t\"formats\": [ \"markdown\" ],\r\n\t\t\t\"onlyMainContent\": true,\r\n\t\t\t\"includeTags\": [ \"article\" ]\r\n\t\t}\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.firecrawl.dev/v1/crawl",
+					"protocol": "https",
+					"host": [
+						"api",
+						"firecrawl",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"crawl"
+					]
+				},
+				"description": "## Request Overview\n\nThis is a **POST** request to the endpoint `https://api.firecrawl.dev/v1/crawl`. This API is designed to initiate a web crawling operation based on the specified parameters.\n\n### Request Parameters\n\nThe request body must be in JSON format and includes the following parameters:\n\n- **url** (string): The target URL to crawl. For example, `\"https://docs.nodul.ru/docs/7cf1dd92-8fb6-4b47-817c-5671778d2814/\"`.\n    \n- **limit** (integer): The maximum number of pages to crawl. For example, `250`.\n    \n- **maxDepth** (integer): The maximum depth of links to follow from the initial URL. For example, `5`.\n    \n- **includePaths** (array of strings): A list of regex patterns that specify which paths to include in the crawl. Example: `docs/.`.\n    \n- **ignoreSitemap** (boolean): A flag indicating whether to ignore the sitemap of the website.\n    \n- **allowBackwardLinks** (boolean): A flag indicating whether to follow backward links.\n    \n- **scrapeOptions** (object): An object containing options for scraping.\n    \n    - **formats** (array of strings): The formats to use for the scraped content. Example: `[\"markdown\"]`.\n        \n    - **onlyMainContent** (boolean): A flag indicating whether to scrape only the main content. Example: `true`.\n        \n    - **includeTags** (array of strings): A list of HTML tags to include in the scraped content. Example: `[\"article\"]`.\n        \n    - **excludeTags** (array of strings): A list of HTML tags to exclude from the scraped content. Example: `[\".helpkit-article-feedback-wrap\", \".h-30\", \"button\"]`.\n        \n\n#### Expected Response\n\nThe response from this endpoint will typically include the results of the crawl operation, which may consist of the following:\n\n- **status** (string): Indicates the success or failure of the crawl operation.\n    \n- **data** (object): Contains the scraped content and any relevant metadata.\n    \n- **errors** (array of strings): A list of any errors encountered during the crawl.\n    \n\nMake sure to handle the response appropriately based on the status returned."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Results",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Firecrawl_API}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "GET https://api.firecrawl.dev/v1/crawl/{{job_id}}",
+					"protocol": "GET https",
+					"host": [
+						"api",
+						"firecrawl",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"crawl",
+						"{{job_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Firecrawl_API",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "job_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
