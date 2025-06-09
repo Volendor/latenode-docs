@@ -2,6 +2,18 @@
 <p align="center">
   <img src="./assets/banner.png" alt="Latenode Docs Banner" />
 </p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white" alt="Postman"/>
+  <img src="https://img.shields.io/badge/GNU%20Bash-4EAA25?style=for-the-badge&logo=GNU%20Bash&logoColor=white" alt="Bash"/>
+  <img src="https://img.shields.io/badge/Firecrawl-EB844E?style=for-the-badge&logo=fireship&logoColor=white" alt="Firecrawl"/>
+  <img src="https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white" alt="Markdown"/>
+</p>
+<p align="center">
+  <a href="https://project-types.github.io/#toy">
+  <img src="https://img.shields.io/badge/project%20type-toy-blue" alt="Toy Badge"/>
+  </a>
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs-welcome"/>
+</p>
 
 ## What is this
 This repo contains:
