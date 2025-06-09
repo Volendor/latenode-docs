@@ -35,4 +35,4 @@ OR
 </p>
 
 ## Licence
-This repository contains Markdown copies of Latenode documentation scraped from latenode.com for personal use and reference. No license granted – please refer to original documentation at https://help.latenode.com/ for official terms.
+This repository contains Markdown scraped copies of **Latenode** and **Nodul** documentation for personal use and reference. No license granted – please refer to original documentation at https://help.latenode.com and https://docs.nodul.ru for official terms.
