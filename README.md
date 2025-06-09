@@ -31,9 +31,7 @@ OR
 ./doc_utils.sh --all
 ```
 <p align="center">
-  <video src="./assets/demo.mp4" autoplay loop muted playsinline width="600">
-    Your browser does not support the video tag.
-  </video>
+  <img src="./assets/demo.gif" alt="CLI demo of doc_utils.sh" />
 </p>
 
 ## Licence
